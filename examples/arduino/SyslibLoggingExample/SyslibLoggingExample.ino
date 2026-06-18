@@ -1,14 +1,7 @@
 #include <Arduino.h>
 #include <pypilot_syslib.hpp>
 
-class SerialLogSink : public pypilot_syslib::LogSink {
-public:
-    void write(const pypilot_syslib::LogRecord& record) override {
-        Serial.println(record.message ? record.message : "");
-    }
-};
-
-SerialLogSink sink;
+pypilot_syslib::ArduinoSerialLogSink sink(Serial);
 pypilot_syslib::Logger logger(&sink);
 
 void setup() {
